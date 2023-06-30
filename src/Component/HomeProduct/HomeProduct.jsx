@@ -29,10 +29,10 @@ const HomeProduct = () => {
     useEffect(() => {
         let sortedProducts = [...arrProduct];
 
-        if (sortBy === 'asc') {
-            sortedProducts = orderBy(sortedProducts, 'price', 'asc');
-        } else if (sortBy === 'desc') {
-            sortedProducts = orderBy(sortedProducts, 'price', 'desc');
+        if (sortBy === 'ascending') {
+            sortedProducts = orderBy(sortedProducts, 'price', 'ascending');
+        } else if (sortBy === 'descending') {
+            sortedProducts = orderBy(sortedProducts, 'price', 'descending');
         } else {
             sortedProducts = [...arrProduct];
         }
@@ -45,19 +45,10 @@ const HomeProduct = () => {
         <div className='container mt-5'>
             <div className={'SearchBar d-flex'}>
                 <div className='price-select'>
-                    <select onChange={handleSort} className={`price-sort`} name="sort-by-price">
+                    <select onChange={handleSort} name="sort-by-price">
                         <option value="none">Sort by price</option>
-                        <option value="desc">Descending</option>
-                        <option value="asc">Ascending</option>
-                    </select>
-                </div>
-                <div className='product-select'>
-                    <select name="" id="" onChange={(e) => setSelectedCategory(e.target.value)}>
-                        <option value="">All Product</option>
-                        <option value="Nike">Nike</option>
-                        <option value="Adidas">Adidas</option>
-                        <option value="Vans">Vans</option>
-                        <option value="Converse">Converse</option>
+                        <option value="descending">Descending</option>
+                        <option value="ascending">Ascending</option>
                     </select>
                 </div>
             </div>
