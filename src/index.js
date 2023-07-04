@@ -11,9 +11,11 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import UpdateProfile from './pages/UpdateProfile';
 import Order from './pages/Order';
+import Favourite from './pages/Favourite';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import { Cart } from './pages/Cart';
+import { Like } from './pages/Like';
 import SearchProduct from './pages/SearchProduct';
 import Loading from './HOC/Loading';
 
@@ -30,9 +32,11 @@ root.render(
           </Route>
           <Route path='/search' element={<SearchProduct></SearchProduct>}></Route>
           <Route path='/cart' element={<Cart></Cart>}></Route>
+          <Route path='/like' element={<Like></Like>}></Route>
           <Route path='/profile' element={<Profile></Profile>}></Route>
           <Route path='/update' element={<UpdateProfile></UpdateProfile>}></Route>
           <Route path='/order' element={<Order></Order>}></Route>
+          <Route path='/favourite' element={<Favourite></Favourite>}></Route>
         </Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>

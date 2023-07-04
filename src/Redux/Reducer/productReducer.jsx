@@ -1,10 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { http } from '../../util/config';
+import { http, getStoreJson, USER_LOGIN } from '../../util/config';
 import { setLoading } from './loadingReducer';
-
+import axios from 'axios';
 const initialState = {
     cart: [],
-    arrProduct: []
+    arrProduct: [],
+    favouriteProducts : [],
+    favoriteProd : {},
+    productCategory : [],
+
 }
 const productReducer = createSlice({
     name: 'productReducer',
@@ -12,6 +16,9 @@ const productReducer = createSlice({
     reducers: {
         getAllProductAction: (state, action) => {
             state.arrProduct = action.payload
+        },
+        getProductCategory: (state, action) => {
+          state.arrProduct = action.payload
         },
         addCartAction: (state, action) => {
             let item = { ...action.payload, quantity: 1 };
@@ -45,22 +52,107 @@ const productReducer = createSlice({
         },
         sortProductAction: (state, action) => {
             state.arrProduct = action.payload
-        }
+        },
+        favouriteAction : (state,action) => {
+            state.favouriteProducts = action.payload
+        },
+        likeAction: (state,action) => {
+            state.arrProduct = action.payload
+        },
+        unlikeAction : (state,action) => {
+           state.favoriteProd = action.payload
+        },
     }
 }
 );
-export const { getAllProductAction, addCartAction, delCartAction, changeQuantityAction, sortProductAction } = productReducer.actions
+export const { getAllProductAction, addCartAction, delCartAction, changeQuantityAction, sortProductAction,favouriteAction,likeAction,unlikeAction, getProductCategory } = productReducer.actions
 export default productReducer.reducer
-export const getAllProductApi = () => {
+export const getAllProductApi = (value) => {
 
     return async (dispatch) => {
         let loadingState = setLoading('block');
         dispatch(loadingState);
-        let res = await http.get('/api/Product');
+        let res =   await axios ({
+                 url : `https://shop.cyberlearn.vn/api/Product?keyword= ${value}`,
+                 method : 'GET'
+             })
         const actionProduct = getAllProductAction(res.data.content);//fulfill
         dispatch(actionProduct);
         let loadingStateNone = setLoading('none');
         dispatch(loadingStateNone);
     }
 }
+// export  const getProductCategoryApi =  (value) => {
+//   return async (dispatch) => {
+//    try {
+//      let res =   await axios ({
+//        url : `https://shop.cyberlearn.vn/api/Product?keyword= ${value}`,
+//        method : 'GET'
+//    })
+ 
+//    const action2 = getProductCategory(res.data.content)
+//    dispatch(action2)
+//    }catch(err) {
+//      console.log(err)
+//    }
+    
+//   }
+
+// }
+export const favouriteActionApi = async(dispatch) => {
+    try{
+      let res = await axios({
+        url: 'https://shop.cyberlearn.vn/api/Users/getproductfavorite',
+        method : 'GET',
+        headers : {
+          Authorization : `Bearer ${getStoreJson(USER_LOGIN).accessToken}`
+        }
+      })
+      const action = favouriteAction(res.data.content.productsFavorite)
+      dispatch(action)
+  }catch(err) {
+      console.log(err)
+    }
+    
+  }
+  
+export const likeActionApi = (productId) => {
+    return async (dispatch) => {
+        try {
+          let res = await axios ({
+            url : `https://shop.cyberlearn.vn/api/Users/like?productId=${productId}`,
+            method : 'GET',
+          
+            headers : {
+              Authorization : `Bearer ${getStoreJson(USER_LOGIN).accessToken}`
+            }
+          })
+          const action = likeAction(res.data.content);
+          dispatch(action)
+        }catch(err) {
+          console.log(err)
+        }
+     }
+  }
+  
+  export const unlikeActionApi = (productId) => {
+    return async (dispatch) => {
+      try {
+        let res = await axios ({
+          url : `https://shop.cyberlearn.vn/api/Users/unlike?productId=${productId}`,
+          method : 'GET',
+        
+          headers : {
+            Authorization : `Bearer ${getStoreJson(USER_LOGIN).accessToken}`
+          }
+        })
+        
+        const action = unlikeAction(res.data.content);
+        dispatch(action)
+      }catch(err) {
+        console.log(err)
+      }
+    
+    }
+  }
 

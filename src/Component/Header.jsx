@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { ShoppingCartOutlined, EditOutlined, LogoutOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, EditOutlined, LogoutOutlined,HeartFilled } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { Dropdown } from 'antd';
@@ -60,6 +60,11 @@ const Header = () => {
             label: <NavLink className="nav-link mt-2 bin1" to="/update">Update Your Profile</NavLink>,
             key: '3',
             icon: <EditOutlined className='bin1' />
+        },
+        {
+            label: <NavLink className="nav-link mt-2 bin1" to="/favourite">Favourite Products</NavLink>,
+            key: '4',
+            icon: <HeartFilled className='bin1' />
         },
         {
             type: 'divider',
