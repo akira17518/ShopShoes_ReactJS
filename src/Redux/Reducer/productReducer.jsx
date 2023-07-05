@@ -50,22 +50,13 @@ const productReducer = createSlice({
                 }
             }
         },
-        sortProductAction: (state, action) => {
-            state.arrProduct = action.payload
-        },
-        favouriteAction : (state,action) => {
-            state.favouriteProducts = action.payload
-        },
-        likeAction: (state,action) => {
-            state.arrProduct = action.payload
-        },
-        unlikeAction : (state,action) => {
-           state.favoriteProd = action.payload
-        },
+        sortProductAction : (state,action) => {
+          state.arrProduct = action.payload
+        }
     }
 }
 );
-export const { getAllProductAction, addCartAction, delCartAction, changeQuantityAction, sortProductAction,favouriteAction,likeAction,unlikeAction, getProductCategory } = productReducer.actions
+export const { getAllProductAction, addCartAction, delCartAction, changeQuantityAction,sortProductAction , getProductCategory } = productReducer.actions
 export default productReducer.reducer
 export const getAllProductApi = (value) => {
 
@@ -82,77 +73,4 @@ export const getAllProductApi = (value) => {
         dispatch(loadingStateNone);
     }
 }
-// export  const getProductCategoryApi =  (value) => {
-//   return async (dispatch) => {
-//    try {
-//      let res =   await axios ({
-//        url : `https://shop.cyberlearn.vn/api/Product?keyword= ${value}`,
-//        method : 'GET'
-//    })
- 
-//    const action2 = getProductCategory(res.data.content)
-//    dispatch(action2)
-//    }catch(err) {
-//      console.log(err)
-//    }
-    
-//   }
-
-// }
-export const favouriteActionApi = async(dispatch) => {
-    try{
-      let res = await axios({
-        url: 'https://shop.cyberlearn.vn/api/Users/getproductfavorite',
-        method : 'GET',
-        headers : {
-          Authorization : `Bearer ${getStoreJson(USER_LOGIN).accessToken}`
-        }
-      })
-      const action = favouriteAction(res.data.content.productsFavorite)
-      dispatch(action)
-  }catch(err) {
-      console.log(err)
-    }
-    
-  }
-  
-export const likeActionApi = (productId) => {
-    return async (dispatch) => {
-        try {
-          let res = await axios ({
-            url : `https://shop.cyberlearn.vn/api/Users/like?productId=${productId}`,
-            method : 'GET',
-          
-            headers : {
-              Authorization : `Bearer ${getStoreJson(USER_LOGIN).accessToken}`
-            }
-          })
-          const action = likeAction(res.data.content);
-          dispatch(action)
-        }catch(err) {
-          console.log(err)
-        }
-     }
-  }
-  
-  export const unlikeActionApi = (productId) => {
-    return async (dispatch) => {
-      try {
-        let res = await axios ({
-          url : `https://shop.cyberlearn.vn/api/Users/unlike?productId=${productId}`,
-          method : 'GET',
-        
-          headers : {
-            Authorization : `Bearer ${getStoreJson(USER_LOGIN).accessToken}`
-          }
-        })
-        
-        const action = unlikeAction(res.data.content);
-        dispatch(action)
-      }catch(err) {
-        console.log(err)
-      }
-    
-    }
-  }
 

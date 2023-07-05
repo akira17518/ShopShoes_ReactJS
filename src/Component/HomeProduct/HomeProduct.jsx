@@ -3,7 +3,7 @@ import { Avatar, Card, Col, Row } from 'antd';
 import { HeartFilled } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { orderBy } from 'lodash';
-import { getAllProductApi, sortProductAction,favouriteActionApi,likeActionApi,unlikeActionApi } from '../../Redux/Reducer/productReducer';
+import { getAllProductApi,favouriteActionApi,likeActionApi,unlikeActionApi,sortProductAction } from '../../Redux/Reducer/productReducer';
 import { NavLink } from 'react-router-dom';
 import './HomeProduct.css';
 
@@ -25,46 +25,30 @@ const HomeProduct = () => {
     const handleSort = (e) => {
         const sortByValue = e.target.value;
         setSortBy(sortByValue);
-    };
-    useEffect(() => {
+      };
+    
+      useEffect(() => {
         let sortedProducts = [...arrProduct];
-
-        if (sortBy === 'ascending') {
-            sortedProducts = orderBy(sortedProducts, 'price', 'ascending');
-        } else if (sortBy === 'descending') {
-            sortedProducts = orderBy(sortedProducts, 'price', 'descending');
-        } else {
+    
+        if (sortBy === 'asc') {
+            sortedProducts = orderBy(sortedProducts, 'price', 'asc');
+          } else if (sortBy === 'desc') {
+            sortedProducts = orderBy(sortedProducts, 'price', 'desc');
+          } else {
             sortedProducts = [...arrProduct];
-        }
-
+          }
+    
         const action = sortProductAction(sortedProducts);
         dispatch(action);
-    }, [sortBy]);
-
-    
-    const handleLikeClick = (sneakerId) => {
-        const isFavorite = favoriteStatus[sneakerId];
-        const updatedStatus = { ...favoriteStatus };
-        updatedStatus[sneakerId] = !isFavorite;
-        setFavoriteStatus(updatedStatus);
-    
-     
-        if (isFavorite) {
-          const action = unlikeActionApi(sneakerId);
-          dispatch(action);
-        } else {
-          const action = likeActionApi(sneakerId);
-          dispatch(action);
-        }
-      };
+      }, [sortBy]);
     return (
         <div className='container mt-5'>
             <div className={'SearchBar d-flex'}>
                 <div className='price-select'>
                     <select onChange={handleSort} name="sort-by-price">
                         <option value="none">Sort by price</option>
-                        <option value="descending">Descending</option>
-                        <option value="ascending">Ascending</option>
+                        <option value="desc">Descending</option>
+                        <option value="asc">Ascending</option>
                     </select>
                 </div>
                 <div>
