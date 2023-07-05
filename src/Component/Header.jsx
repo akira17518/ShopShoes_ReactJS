@@ -62,11 +62,6 @@ const Header = () => {
             icon: <EditOutlined className='bin1' />
         },
         {
-            label: <NavLink className="nav-link mt-2 bin1" to="/favourite">Favourite Products</NavLink>,
-            key: '4',
-            icon: <HeartFilled className='bin1' />
-        },
-        {
             type: 'divider',
         },
         {
