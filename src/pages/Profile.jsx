@@ -17,7 +17,7 @@ const Profile = () => {
 
   return (
     <div className='container mt-5'>
-      <div className="bin card">
+      <div className="card" style={{ backgroundColor: '#E0FFFF' }}>
         <div className="card-header">
           <h2 className='text-center bin1'>Your Profile</h2>
         </div>
@@ -53,7 +53,7 @@ const Profile = () => {
               </div>
               <div className=" col-12">
                 <p className='bin1 d-inline-block me-2'>Phone</p>
-                <input type="number" className='bin1 form-control mb-2' id='phone' name='phone' disabled={true} value={userProfile?.phone} />
+                <input type="text" className='bin1 form-control mb-2' id='phone' name='phone' disabled={true} value={userProfile?.phone} />
               </div>
               <div className="col-md-12 col-12">
                 <p className='bin1 me-2'>Gender</p>

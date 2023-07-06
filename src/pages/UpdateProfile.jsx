@@ -31,7 +31,7 @@ const UpdateProfile = () => {
 
     return (
         <div className='container mt-5'>
-            <form className="card bin" onSubmit={updateMik.handleSubmit}>
+            <form className="card" style={{backgroundColor:'#E0FFFF'}} onSubmit={updateMik.handleSubmit}>
                 <div className="card-header">
                     <h2 className='text-center bin1'>Update Your Profile</h2>
                 </div>
@@ -39,7 +39,7 @@ const UpdateProfile = () => {
                     <div className="row align-items-center">
                         <div className="col-lg-4 col-12">
                             <div className="avatar mx-auto w-50 d-flex">
-                                <Avatar className='bin1'
+                                <Avatar className='bin'
                                     size={{
                                         xs: 60,
                                         sm: 70,
@@ -66,7 +66,7 @@ const UpdateProfile = () => {
                             <div className="row">
                                 <div className="col-12">
                                     <p className='bin1 d-inline-block me-2'>Phone</p> <span className='text-danger'>{updateMik.errors.phone}</span>
-                                    <input type="string" className='bin1 form-control mb-2' id='phone' name='phone' onChange={updateMik.handleChange} defaultValue={userUpdate?.phone} />
+                                    <input type="number" className='bin1 form-control mb-2' id='phone' name='phone' onChange={updateMik.handleChange} defaultValue={userUpdate?.phone} />
                                 </div>
                             </div>
                             <div className="row">

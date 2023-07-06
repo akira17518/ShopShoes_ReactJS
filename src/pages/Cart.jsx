@@ -158,7 +158,7 @@ export const Cart = () => {
                                         window.alert('Hiện không có đơn hàng ! Vui lòng kiểm tra lại')
                                     }
                                 }}>
-                                    <p className='bin1 my-3'>Submit Order</p>
+                                    <p className='bin1 my-auto'>Submit Order</p>
                                 </button>
                             </div>
                         </div>
